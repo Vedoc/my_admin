@@ -55,7 +55,7 @@ gem 'carrierwave'
 
 # UI interface for rails-settings-cached in active admin
 # agem 'activeadmin_settings_cached', '>= 2.3.1'
-gem 'activeadmin_settings_cached', '~> 2.3', '>= 2.3.1'
+
 
 # Ruby bindings to Firebase Cloud Messaging
 gem 'fcm'
