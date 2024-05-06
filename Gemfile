@@ -62,7 +62,7 @@ gem 'carrierwave'
 # Ruby bindings to Firebase Cloud Messaging
 gem 'fcm'
 
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
