@@ -26,8 +26,8 @@ RUN apk add --update --no-cache \
 
 WORKDIR /app
 
-# Create /app/tmp/cache directory
-RUN mkdir -p /app/tmp/cache
+# Create /app/tmp/cache directory and set permissions
+RUN mkdir -p /app/tmp/cache && chmod -R 777 /app/tmp/cache
 
 # Install gems
 COPY Gemfile* /app/
