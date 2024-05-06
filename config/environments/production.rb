@@ -20,6 +20,9 @@ Rails.application.configure do
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
 
+  # Apache or NGINX already handles this.
+  config.public_file_server.enabled = ENV[ 'RAILS_SERVE_STATIC_FILES' ].present?
+
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
 
@@ -73,6 +76,22 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    user_name: ENV[ 'MAIL_USERNAME' ],
+    password: ENV[ 'MAIL_PASSWORD' ],
+    domain: ENV[ 'APP_HOST' ],
+    address: ENV[ 'SMTP_DOMAIN' ],
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -83,6 +102,18 @@ Rails.application.configure do
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
+
+  # Send deprecation notices to registered listeners.
+  config.active_support.deprecation = :notify
+
+    # Use default logging formatter so that PID and timestamp are not suppressed.
+    config.log_formatter = ::Logger::Formatter.new
+
+    if ENV[ 'RAILS_LOG_TO_STDOUT' ].present?
+      logger           = ActiveSupport::Logger.new( STDOUT )
+      logger.formatter = config.log_formatter
+      config.logger    = ActiveSupport::TaggedLogging.new( logger )
+    end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

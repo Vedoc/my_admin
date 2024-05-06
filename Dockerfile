@@ -1,62 +1,104 @@
-# syntax = docker/dockerfile:1
+# Stage: Builder
+FROM ruby:3.3.0-alpine as Builder
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.1
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+# Install Bundler 2.5.6
+RUN gem install bundler -v '2.5.6'
 
-# Rails app lives here
-WORKDIR /rails
+ARG FOLDERS_TO_REMOVE
+ARG BUNDLE_WITHOUT
+ARG RAILS_ENV
+ARG NODE_ENV
+ARG GIT_CREDENTIALS
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
+ENV RAILS_ENV ${RAILS_ENV}
+ENV NODE_ENV ${NODE_ENV}
+ENV SECRET_KEY_BASE=foo
+ENV RAILS_SERVE_STATIC_FILES=true
 
+RUN apk add --update --no-cache \
+    build-base \
+    postgresql-dev \
+    git \
+    nodejs-current \
+    yarn \
+    tzdata
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+WORKDIR /app
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
+# Create /app/tmp/cache directory
+RUN mkdir -p /app/tmp/cache
 
-# Install application gems
-COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+# Install gems
+COPY Gemfile* /app/
+RUN bundle config frozen false \
+  && bundle config "https://github.com/vedoc/vedoc-plugin.git" $GIT_CREDENTIALS \
+  && bundle install -j4 --retry 3 \
+  && rm -rf /usr/local/bundle/cache/*.gem \
+  && find /usr/local/bundle/gems/ -name "*.c" -delete \
+  && find /usr/local/bundle/gems/ -name "*.o" -delete \
+  && find /app/tmp/cache -type f -exec rm {} \;
 
-# Copy application code
+# Install yarn packages
+COPY package.json yarn.lock .yarnclean /app/
+RUN yarn install
+
+# Add the Rails app
 COPY . .
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# Clear asset pipeline cache
+# RUN bundle exec rake assets:clobber
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Precompile assets
+# RUN bundle exec rake assets:precompile --trace
 
+# Copy the startup script and grant executable permission
+COPY docker/startup.sh /docker/startup.sh
+RUN chmod +x /docker/startup.sh
 
-# Final stage for app image
-FROM base
+# Remove folders not needed in resulting image
+RUN rm -rf $FOLDERS_TO_REMOVE
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# Copy init.sql and entrypoint script
+COPY init.sql /docker-entrypoint-initdb.d/
+COPY docker/ /docker/
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+# Stage Final
+FROM ruby:3.3.0-alpine
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
+ARG ADDITIONAL_PACKAGES
+ARG EXECJS_RUNTIME
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# Add Alpine packages
+RUN apk add --update --no-cache \
+    postgresql-client \
+    imagemagick \
+    $ADDITIONAL_PACKAGES \
+    tzdata \
+    file
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+# Add user
+RUN addgroup -g 1000 -S app \
+ && adduser -u 1000 -S app -G app
+USER app
+
+# Set working directory
+WORKDIR /app
+
+# Copy app with gems from former build stage
+COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
+COPY --from=Builder --chown=app:app /app /app
+
+# Set Rails env
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_SERVE_STATIC_FILES true
+ENV EXECJS_RUNTIME $EXECJS_RUNTIME
+
+# Expose Puma port
+EXPOSE 3001
+
+# Save timestamp of image building
+RUN date -u > BUILD_TIME
+
+# Start up
+CMD ["docker/startup.sh"]
