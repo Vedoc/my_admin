@@ -20,22 +20,13 @@ module AdminRepo
       env.export_concurrent = false
     end
 
-      # Don't generate system test files.
-      config.generators.system_tests = nil
+    # Don't generate system test files.
+    config.generators.system_tests = nil
 
-      config.middleware.use Rack::MethodOverride
-      config.middleware.use ActionDispatch::Flash
-      config.middleware.use ActionDispatch::Cookies
-      config.middleware.use ActionDispatch::Session::CookieStore
-      config.assets.enabled = true
-    end
-
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.assets.enabled = true
   end
 end
