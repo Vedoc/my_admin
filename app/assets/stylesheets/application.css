@@ -12,5 +12,6 @@
  *
  *= require_tree .
  *= require_self
- *= stub “active_admin"
+ *= stub "active_admin"
+
  */
