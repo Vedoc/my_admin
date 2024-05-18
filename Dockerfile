@@ -45,6 +45,8 @@ RUN yarn install
 # Add the Rails app
 COPY . .
 
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
 # Precompile assets
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
