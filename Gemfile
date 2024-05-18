@@ -2,7 +2,7 @@ source "https://rubygems.org"
 git_source( :github ) { | repo | "https://github.com/#{ repo }.git" }
 
 # ruby "3.3.1"
-# ruby '3.3.0'
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -111,3 +111,9 @@ end
 gem "devise", "~> 4.9"
 
 gem "activeadmin", "~> 3.2"
+
+gem "rexml", ">= 3.2.7"
+
+
+
+gem "nokogiri", ">= 1.16.5"
