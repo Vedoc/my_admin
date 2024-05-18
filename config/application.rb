@@ -19,6 +19,7 @@ module AdminRepo
     config.autoload_lib(ignore: %w(assets tasks))
 
     config.assets.paths << Rails.root.join('vendor', 'assets')
+    
 
     # Configuration for the application, engines, and railties goes here.
     #
