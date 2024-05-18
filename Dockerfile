@@ -51,6 +51,8 @@ COPY . .
 
 # Precompile assets
 # RUN bundle exec rake assets:precompile --trace
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+
 
 # Copy the startup script and grant executable permission
 COPY docker/startup.sh /docker/startup.sh
