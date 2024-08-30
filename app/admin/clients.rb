@@ -19,7 +19,8 @@ ActiveAdmin.register Client do
 
   show do
     attributes_table do
-      row( :avatar ) { | c | avatar_field( c.avatar ) }
+      # row( :avatar ) { | c | avatar_field( c.avatar ) }
+      row(:avatar) { |c| image_tag(c.avatar_url, size: "100x100") if c.avatar.present? }
       row :email
       row :name
       row :phone
