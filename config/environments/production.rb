@@ -21,7 +21,7 @@ Rails.application.configure do
   config.require_master_key = true
 
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV[ 'RAILS_SERVE_STATIC_FILES' ].present?
+  # config.public_file_server.enabled = ENV[ 'RAILS_SERVE_STATIC_FILES' ].present?
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
@@ -55,6 +55,8 @@ Rails.application.configure do
   config.assume_ssl = true
 
   config.hosts.clear
+  config.hosts << "100-25-145-224.nip.io"
+  config.hosts << "100.25.145.224"
 
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -126,7 +128,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   config.serve_static_assets = true
 
