@@ -19,7 +19,9 @@ module AdminRepo
     config.autoload_lib(ignore: %w(assets tasks))
 
     config.assets.paths << Rails.root.join('vendor', 'assets')
-    
+    config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets')
+    config.assets.paths << Rails.root.join('app', 'assets', 'javascripts')
+    config.assets.initialize_on_precompile = false
 
     # Configuration for the application, engines, and railties goes here.
     #
