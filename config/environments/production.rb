@@ -25,15 +25,19 @@ Rails.application.configure do
   config.require_master_key = true
 
   # Static file serving configuration
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{365.days.to_i}"
+  }
+
   # Compress CSS using a preprocessor.
   config.assets.css_compressor = :sass
 
   # Asset compilation settings
   config.assets.compile = true
   config.assets.digest = true
-  config.assets.precompile += %w( active_admin.scss application.css active_admin.js )
+  config.assets.debug = false
+  config.assets.js_compressor = :terser
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
