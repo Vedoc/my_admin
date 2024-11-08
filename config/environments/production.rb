@@ -1,7 +1,12 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Allow the specified hosts first thing
+  config.hosts = nil  # This disables the host check completely
+  config.hosts = [
+    "100-25-145-224.nip.io",
+    "100.25.145.224"
+  ]
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -9,40 +14,35 @@ Rails.application.configure do
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
-  # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
-  # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
+  # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], 
+  # config/master.key, or an environment key such as config/credentials/production.key
   config.require_master_key = true
 
-  # Apache or NGINX already handles this.
-  # config.public_file_server.enabled = ENV[ 'RAILS_SERVE_STATIC_FILES' ].present?
-
-  # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
-  # config.public_file_server.enabled = false
-
+  # Static file serving configuration
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  
   # Compress CSS using a preprocessor.
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
-  # Do not fall back to assets pipeline if a precompiled asset is missed.
+  # Asset compilation settings
   config.assets.compile = true
-  # config.assets.compile = false
   config.assets.digest = true
-
+  config.assets.precompile += %w( active_admin.scss application.css active_admin.js )
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
-  # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
+  config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
+  # Store uploaded files on the local file system
   config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain.
@@ -50,62 +50,40 @@ Rails.application.configure do
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
+  # SSL Configuration
   config.assume_ssl = true
-
-  config.hosts.clear
-  config.hosts << "100-25-145-224.nip.io"
-  config.hosts << "100.25.145.224"
-
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
-
-  # "info" includes generic and useful information about system operation, but avoids logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII). If you
-  # want to log everything, set the level to "debug".
+  # Logging configuration
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_tags = [ :request_id ]
+  
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Log to STDOUT by default
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
 
-  # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
-  # config.active_job.queue_name_prefix = "admin_repo_production"
-
+  # Action Mailer Configuration
   config.action_mailer.perform_caching = false
-
   config.action_mailer.raise_delivery_errors = true
-
   config.action_mailer.perform_deliveries = true
-
   config.action_mailer.delivery_method = :smtp
-
   config.action_mailer.smtp_settings = {
-    user_name: ENV[ 'MAIL_USERNAME' ],
-    password: ENV[ 'MAIL_PASSWORD' ],
-    domain: ENV[ 'APP_HOST' ],
-    address: ENV[ 'SMTP_DOMAIN' ],
+    user_name: ENV['MAIL_USERNAME'],
+    password: ENV['MAIL_PASSWORD'],
+    domain: ENV['APP_HOST'],
+    address: ENV['SMTP_DOMAIN'],
     port: 587,
     authentication: :plain,
     enable_starttls_auto: true
   }
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-
-  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation cannot be found).
+  # Enable locale fallbacks for I18n
   config.i18n.fallbacks = true
 
   # Don't log any deprecations.
@@ -114,30 +92,15 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  config.assets.precompile += %w( active_admin.scss application.css active_admin.js )
-
-    # Use default logging formatter so that PID and timestamp are not suppressed.
-    config.log_formatter = ::Logger::Formatter.new
-
-    if ENV[ 'RAILS_LOG_TO_STDOUT' ].present?
-      logger           = ActiveSupport::Logger.new( STDOUT )
-      logger.formatter = config.log_formatter
-      config.logger    = ActiveSupport::TaggedLogging.new( logger )
-    end
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Clean up conflicting static file configurations
+  # Remove deprecated settings
   # config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.serve_static_assets = true
 
-  config.serve_static_assets = true
-
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
+  # Enable DNS rebinding protection and other Host header attacks.
   # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
