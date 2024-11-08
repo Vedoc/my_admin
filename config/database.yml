@@ -4,8 +4,7 @@ default: &default
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
   database: <%= ENV['DB_NAME'] %>
-  host: <%= ENV['DB_HOST'].split(':')[0] if ENV['DB_HOST'].present? %>  # Check if DB_HOST is present before splitting
-  port: <%= ENV['DB_HOST'].split(':')[1] if ENV['DB_HOST'].present? && ENV['DB_HOST'].include?(':') %>  # Include port if present and DB_HOST is present
+  host: <%= ENV['DB_HOST'] %>
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
 
 development:
