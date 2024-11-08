@@ -33,5 +33,8 @@ module AdminRepo
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
+
+    Rails.application.config.hosts.clear
+    config.action_dispatch.show_exceptions = true
   end
 end
