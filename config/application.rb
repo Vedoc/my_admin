@@ -37,6 +37,6 @@ module AdminRepo
     config.middleware.use ActionDispatch::Flash
 
     Rails.application.config.hosts.clear
-    config.action_dispatch.show_exceptions = true
+    config.action_dispatch.show_exceptions = :all
   end
 end
