@@ -7,7 +7,8 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+<%= stylesheet_link_tag 'active_admin', media: 'all' if controller_path.start_with?('admin/') %>
+<%= javascript_importmap_tags %>
   </head>
 
   <body>
