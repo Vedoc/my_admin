@@ -49,6 +49,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Precompile assets
 # RUN RAILS_ENV=production rake assets:precompile
+# RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 # Copy the startup script and grant executable permission
 COPY docker/startup.sh /docker/startup.sh
