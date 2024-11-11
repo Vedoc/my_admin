@@ -349,4 +349,9 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  # Add CSRF protection
+  config.before_action do
+    protect_from_forgery with: :exception
+  end
 end

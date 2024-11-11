@@ -10,13 +10,15 @@
 #     policy.font_src    :self, :https, :data
 #     policy.img_src     :self, :https, :data
 #     policy.object_src  :none
-#     policy.script_src  :self, :https
-#     policy.style_src   :self, :https
+#     policy.script_src  :self, :https, "'unsafe-inline'", "'unsafe-eval'"
+#     policy.style_src   :self, :https, "'unsafe-inline'"
+#     # Allow AJAX requests
+#     policy.connect_src :self
 #     # Specify URI for violation reports
 #     # policy.report_uri "/csp-violation-report-endpoint"
 #   end
 #
-#   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
+#   # Generate session nonces for permitted importmap and inline scripts
 #   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
 #   config.content_security_policy_nonce_directives = %w(script-src style-src)
 #
