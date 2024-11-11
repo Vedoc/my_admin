@@ -1,7 +1,4 @@
 ActiveAdmin.setup do |config|
-  config.before_action do
-    skip_forgery_protection if controller_name == 'sessions' && action_name == 'create'
-  end
 
   # == Site Title
   #
@@ -353,9 +350,4 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
-
-  # Add CSRF protection
-  config.before_action do
-    protect_from_forgery with: :exception
-  end
 end

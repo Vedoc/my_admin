@@ -60,4 +60,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # config.asset_host = "http://assets.example.com"
+
+  # Compress CSS using a preprocessor
+  config.assets.css_compressor = :sass
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # config.asset_host = "http://assets.example.com"
+
+  # Compress JavaScripts and CSS
+  config.assets.js_compressor = :terser
+
+  # Generate digests for assets URLs
+  config.assets.digest = true
 end
