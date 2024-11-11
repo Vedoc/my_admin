@@ -1,5 +1,7 @@
 ActiveAdmin.setup do |config|
-  config.skip_before_action :verify_authenticity_token, only: [:create], if: -> { controller_name == 'sessions' }
+  config.before_action do
+    skip_forgery_protection if controller_name == 'sessions' && action_name == 'create'
+  end
 
   # == Site Title
   #
