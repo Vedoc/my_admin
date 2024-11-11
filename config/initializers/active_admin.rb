@@ -1,4 +1,6 @@
 ActiveAdmin.setup do |config|
+  config.skip_before_action :verify_authenticity_token, only: [:create], if: -> { controller_name == 'sessions' }
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout
