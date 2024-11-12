@@ -78,4 +78,7 @@ Rails.application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  # Version of your assets
+  config.assets.version = '1.0'
 end
