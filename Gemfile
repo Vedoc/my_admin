@@ -119,3 +119,5 @@ gem "rexml", ">= 3.2.7"
 gem "nokogiri", ">= 1.16.5"
 
 gem 'inherited_resources'
+
+gem 'terser'
