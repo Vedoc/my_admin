@@ -461,6 +461,7 @@ DEPENDENCIES
   dotenv-rails
   fcm
   importmap-rails
+  inherited_resources
   jbuilder
   listen (~> 3.5)
   nokogiri (>= 1.16.5)
