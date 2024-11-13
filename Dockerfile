@@ -2,17 +2,14 @@
 FROM ruby:3.3.0-alpine as Builder
 
 # Set environment variables
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production \
+    RAILS_SERVE_STATIC_FILES=true \
+    BUNDLE_WITHOUT="development:test"
+
 ARG RAILS_MASTER_KEY
-ARG FOLDERS_TO_REMOVE
-ARG BUNDLE_WITHOUT
-ARG NODE_ENV
 ARG GIT_CREDENTIALS
+
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-ENV BUNDLE_WITHOUT=${BUNDLE_WITHOUT}
-ENV RAILS_ENV=${RAILS_ENV}
-ENV NODE_ENV=${NODE_ENV}
-ENV RAILS_SERVE_STATIC_FILES=true
 
 # Install required packages
 RUN apk add --update --no-cache \
@@ -25,7 +22,7 @@ RUN apk add --update --no-cache \
 
 WORKDIR /app
 
-# Create /app/tmp/cache directory and set permissions
+# Create cache directory with proper permissions
 RUN mkdir -p /app/tmp/cache && chmod -R 777 /app/tmp/cache
 
 # Install gems
@@ -35,8 +32,7 @@ RUN bundle config frozen false \
     && bundle install -j4 --retry 3 \
     && rm -rf /usr/local/bundle/cache/*.gem \
     && find /usr/local/bundle/gems/ -name "*.c" -delete \
-    && find /usr/local/bundle/gems/ -name "*.o" -delete \
-    && find /app/tmp/cache -type f -exec rm {} \;
+    && find /usr/local/bundle/gems/ -name "*.o" -delete
 
 # Install yarn packages
 COPY package.json yarn.lock .yarnclean /app/
@@ -45,59 +41,45 @@ RUN yarn install
 # Add the Rails app
 COPY . .
 
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-
 # Precompile assets
-# RUN RAILS_ENV=production rake assets:precompile
-# RUN bundle exec rake assets:precompile RAILS_ENV=production
+RUN bundle exec rake assets:precompile RAILS_ENV=production
 
-# Copy the startup script and grant executable permission
-COPY docker/startup.sh /docker/startup.sh
-RUN chmod +x /docker/startup.sh
-
-# Remove folders not needed in resulting image
-RUN rm -rf $FOLDERS_TO_REMOVE
-
-# Copy init.sql and entrypoint script
-COPY init.sql /docker-entrypoint-initdb.d/
-COPY docker/ /docker/
-
-# Stage Final
+# Stage: Final
 FROM ruby:3.3.0-alpine
 
-ARG ADDITIONAL_PACKAGES
-ARG EXECJS_RUNTIME
-
-# Add Alpine packages
+# Install production dependencies only
 RUN apk add --update --no-cache \
     postgresql-client \
     imagemagick \
-    $ADDITIONAL_PACKAGES \
     tzdata \
-    file
+    file \
+    nodejs-current
 
-# Add user
-RUN addgroup -g 1000 -S app \
- && adduser -u 1000 -S app -G app
-USER app
+# Add non-root user
+RUN addgroup -g 1000 -S app && \
+    adduser -u 1000 -S app -G app
 
 # Set working directory
 WORKDIR /app
 
-# Copy app with gems from former build stage
+# Copy app with gems from builder stage
 COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
 COPY --from=Builder --chown=app:app /app /app
 
-# Set Rails env
-ENV RAILS_LOG_TO_STDOUT true
-ENV RAILS_SERVE_STATIC_FILES true
-ENV EXECJS_RUNTIME $EXECJS_RUNTIME
+# Set environment variables
+ENV RAILS_ENV=production \
+    RAILS_LOG_TO_STDOUT=true \
+    RAILS_SERVE_STATIC_FILES=true
 
-# Expose Puma port
+# Copy entrypoint script
+COPY --chmod=755 bin/docker-entrypoint /usr/bin/
+
+# Switch to non-root user
+USER app
+
+# Expose port
 EXPOSE 3001
 
-# Save timestamp of image building
-RUN date -u > BUILD_TIME
-
-# Start up
-CMD ["docker/startup.sh"]
+# Set entrypoint and command
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["rails", "server", "-b", "0.0.0.0"]

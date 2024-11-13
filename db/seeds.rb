@@ -8,10 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-AdminUser.find_or_create_by(email: 'admin@mail.com') do |admin|
-    admin.password = 'password'
-    admin.password_confirmation = 'password'
-  end
-  
-  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# Create default admin user
+AdminUser.create!(
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password'
+) if Rails.env.development? && AdminUser.count.zero?
+
+# For production environment, use environment variables
+if Rails.env.production? && AdminUser.count.zero?
+  AdminUser.create!(
+    email: ENV['ADMIN_EMAIL'] || 'admin@example.com',
+    password: ENV['ADMIN_PASSWORD'] || 'password',
+    password_confirmation: ENV['ADMIN_PASSWORD'] || 'password'
+  )
+end
   

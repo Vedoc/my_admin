@@ -1,8 +1,21 @@
-#!/bin/bash -e
+#!/bin/bash
+set -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
+# Remove any existing server.pid file
+rm -f /app/tmp/pids/server.pid
 
-exec "${@}"
+# Wait for database
+until nc -z -v -w30 $DATABASE_HOST $DATABASE_PORT; do
+  echo 'Waiting for database...'
+  sleep 1
+done
+echo "Database is up and running!"
+
+# Setup database if needed
+bundle exec rails db:prepare
+
+# Run seeds if admin user doesn't exist
+bundle exec rails runner "AdminUser.count.zero? && Rails.application.load_seed"
+
+# Then exec the container's main process (what's set as CMD in the Dockerfile)
+exec "$@"

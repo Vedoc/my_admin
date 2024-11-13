@@ -15,12 +15,14 @@ Rails.application.configure do
   config.require_master_key = true
 
   # Static file serving configuration
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true
 
   # Asset compilation settings
-  config.assets.compile = false
+  config.assets.compile = true
   config.assets.digest = true
-  config.assets.precompile += %w( active_admin.scss application.css active_admin.js )
+  config.assets.js_compressor = nil  # Temporarily disable JS compression
+  config.assets.css_compressor = :sass
+  config.assets.precompile += %w( active_admin.css active_admin.js application.css application.js )
 
   # Store uploaded files on the local file system
   config.active_storage.service = :local
@@ -68,13 +70,13 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.asset_host = "http://assets.example.com"
 
   # Compress JavaScripts and CSS
-  config.assets.js_compressor = :terser
+  config.assets.js_compressor = nil  # Temporarily disable JS compression
 
   # Generate digests for assets URLs
   config.assets.digest = true
