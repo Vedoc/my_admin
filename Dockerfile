@@ -18,7 +18,8 @@ RUN apk add --update --no-cache \
     git \
     nodejs-current \
     yarn \
-    tzdata
+    tzdata \
+    netcat-openbsd
 
 WORKDIR /app
 
@@ -42,7 +43,7 @@ RUN yarn install
 COPY . .
 
 # Precompile assets
-RUN bundle exec rake assets:precompile RAILS_ENV=production
+# RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 # Stage: Final
 FROM ruby:3.3.0-alpine
