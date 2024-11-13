@@ -121,3 +121,7 @@ gem "nokogiri", ">= 1.16.5"
 gem 'inherited_resources'
 
 gem 'terser'
+
+gem 'rolify'
+gem 'pundit'
+gem 'activeadmin_addons'

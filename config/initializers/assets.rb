@@ -12,5 +12,7 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'javas
 Rails.application.config.assets.precompile += %w(
   active_admin.css
   active_admin.js
+  active_admin_addons.js
+  active_admin_addons.css
 )
 

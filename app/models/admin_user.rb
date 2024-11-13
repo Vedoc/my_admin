@@ -1,10 +1,17 @@
 class AdminUser < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  rolify
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
 
-         def self.ransackable_attributes(auth_object = nil)
-          %w[id email current_sign_in_at sign_in_count created_at]
-        end
+  after_create :assign_default_role
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[id email current_sign_in_at sign_in_count created_at]
+  end
+
+  private
+
+  def assign_default_role
+    add_role(:viewer) if roles.blank?
+  end
 end

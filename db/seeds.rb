@@ -8,19 +8,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# Create default admin user
-AdminUser.create!(
-  email: 'admin@example.com',
-  password: 'password',
-  password_confirmation: 'password'
-) if Rails.env.development? && AdminUser.count.zero?
+# Create default roles
+%w[admin editor viewer].each do |role_name|
+  Role.find_or_create_by!(name: role_name)
+end
 
-# For production environment, use environment variables
-if Rails.env.production? && AdminUser.count.zero?
-  AdminUser.create!(
-    email: ENV['ADMIN_EMAIL'] || 'admin@example.com',
-    password: ENV['ADMIN_PASSWORD'] || 'password',
-    password_confirmation: ENV['ADMIN_PASSWORD'] || 'password'
+# Create default admin user with admin role
+if AdminUser.count.zero?
+  admin = AdminUser.create!(
+    email: ENV['ADMIN_EMAIL'] || 'arnoldnek@gmail.com',
+    password: ENV['ADMIN_PASSWORD'] || 'password123',
+    password_confirmation: ENV['ADMIN_PASSWORD'] || 'password123'
   )
+  admin.add_role(:admin)
 end
   

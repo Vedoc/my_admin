@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_03_092615) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
+  create_schema "topology"
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+  enable_extension "postgis_topology"
 
   create_table "accounts", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -62,6 +65,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_092615) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "admin_users_roles", id: false, force: :cascade do |t|
+    t.bigint "admin_user_id"
+    t.bigint "role_id"
+    t.index ["admin_user_id", "role_id"], name: "index_admin_users_roles_on_admin_user_id_and_role_id"
+    t.index ["admin_user_id"], name: "index_admin_users_roles_on_admin_user_id"
+    t.index ["role_id"], name: "index_admin_users_roles_on_role_id"
+  end
+
   create_table "car_categories", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", null: false
@@ -95,6 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_092615) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "card_token"
     t.index ["location"], name: "index_clients_on_location", using: :gist
   end
 
@@ -161,6 +173,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_092615) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_ratings_on_client_id"
     t.index ["offer_id"], name: "index_ratings_on_offer_id", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
   create_table "service_requests", force: :cascade do |t|
