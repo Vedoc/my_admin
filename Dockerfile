@@ -1,41 +1,42 @@
 # Stage: Builder
 FROM ruby:3.3.0-alpine as Builder
 
-ARG RAILS_ENV=production
-ARG NODE_ENV=production
-ARG EXECJS_RUNTIME=Node
+# Set environment variables
+ENV RAILS_ENV=production
 ARG RAILS_MASTER_KEY
+ARG FOLDERS_TO_REMOVE
+ARG BUNDLE_WITHOUT
+ARG NODE_ENV
 ARG GIT_CREDENTIALS
-
-ENV RAILS_ENV=${RAILS_ENV} \
-    NODE_ENV=${NODE_ENV} \
-    RAILS_SERVE_STATIC_FILES=true \
-    BUNDLE_WITHOUT="development:test" \
-    RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+ENV BUNDLE_WITHOUT=${BUNDLE_WITHOUT}
+ENV RAILS_ENV=${RAILS_ENV}
+ENV NODE_ENV=${NODE_ENV}
+ENV RAILS_SERVE_STATIC_FILES=true
 
 # Install required packages
 RUN apk add --update --no-cache \
     build-base \
     postgresql-dev \
-    geos-dev \
-    proj-dev \
-    gdal-dev \
     git \
     nodejs-current \
     yarn \
-    tzdata \
-    netcat-openbsd
+    tzdata
 
 WORKDIR /app
 
-# Create cache directory with proper permissions
+# Create /app/tmp/cache directory and set permissions
 RUN mkdir -p /app/tmp/cache && chmod -R 777 /app/tmp/cache
 
 # Install gems
 COPY Gemfile* /app/
 RUN bundle config frozen false \
     && bundle config "https://github.com/vedoc/vedoc-plugin.git" $GIT_CREDENTIALS \
-    && bundle install -j4 --retry 3
+    && bundle install -j4 --retry 3 \
+    && rm -rf /usr/local/bundle/cache/*.gem \
+    && find /usr/local/bundle/gems/ -name "*.c" -delete \
+    && find /usr/local/bundle/gems/ -name "*.o" -delete \
+    && find /app/tmp/cache -type f -exec rm {} \;
 
 # Install yarn packages
 COPY package.json yarn.lock .yarnclean /app/
@@ -44,43 +45,59 @@ RUN yarn install
 # Add the Rails app
 COPY . .
 
-# Precompile assets
-# RUN SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
-# Stage: Final
+# Precompile assets
+# RUN RAILS_ENV=production rake assets:precompile
+# RUN bundle exec rake assets:precompile RAILS_ENV=production
+
+# Copy the startup script and grant executable permission
+COPY docker/startup.sh /docker/startup.sh
+RUN chmod +x /docker/startup.sh
+
+# Remove folders not needed in resulting image
+RUN rm -rf $FOLDERS_TO_REMOVE
+
+# Copy init.sql and entrypoint script
+COPY init.sql /docker-entrypoint-initdb.d/
+COPY docker/ /docker/
+
+# Stage Final
 FROM ruby:3.3.0-alpine
 
-# Install production dependencies
+ARG ADDITIONAL_PACKAGES
+ARG EXECJS_RUNTIME
+
+# Add Alpine packages
 RUN apk add --update --no-cache \
     postgresql-client \
-    geos \
-    proj \
-    gdal \
+    imagemagick \
+    $ADDITIONAL_PACKAGES \
     tzdata \
-    nodejs-current \
-    netcat-openbsd
+    file
 
+# Add user
+RUN addgroup -g 1000 -S app \
+ && adduser -u 1000 -S app -G app
+USER app
+
+# Set working directory
 WORKDIR /app
 
-# Copy app with gems from builder
+# Copy app with gems from former build stage
 COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
-COPY --from=Builder /app /app
+COPY --from=Builder --chown=app:app /app /app
 
-# Set environment variables
-ENV RAILS_ENV=production \
-    RAILS_LOG_TO_STDOUT=true \
-    RAILS_SERVE_STATIC_FILES=true
+# Set Rails env
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_SERVE_STATIC_FILES true
+ENV EXECJS_RUNTIME $EXECJS_RUNTIME
 
-# Add healthcheck
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD nc -z localhost 3001 || exit 1
-
-# Expose port
+# Expose Puma port
 EXPOSE 3001
 
-# Copy and set entrypoint
-COPY bin/docker-entrypoint /usr/bin/
-RUN chmod +x /usr/bin/docker-entrypoint
+# Save timestamp of image building
+RUN date -u > BUILD_TIME
 
-ENTRYPOINT ["docker-entrypoint"]
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+# Start up
+CMD ["docker/startup.sh"]
