@@ -17,7 +17,9 @@ ENV RAILS_ENV=${RAILS_ENV} \
 RUN apk add --update --no-cache \
     build-base \
     postgresql-dev \
-    postgis-dev \
+    geos-dev \
+    proj-dev \
+    gdal-dev \
     git \
     nodejs-current \
     yarn \
@@ -51,7 +53,9 @@ FROM ruby:3.3.0-alpine
 # Install production dependencies
 RUN apk add --update --no-cache \
     postgresql-client \
-    postgis \
+    geos \
+    proj \
+    gdal \
     tzdata \
     nodejs-current \
     netcat-openbsd
