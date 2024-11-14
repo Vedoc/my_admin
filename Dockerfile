@@ -51,6 +51,7 @@ FROM ruby:3.3.0-alpine
 # Install production dependencies only
 RUN apk add --update --no-cache \
     postgresql-client \
+    postgis \
     imagemagick \
     tzdata \
     file \
