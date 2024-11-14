@@ -1,20 +1,23 @@
 # Stage: Builder
 FROM ruby:3.3.0-alpine as Builder
 
-# Set environment variables
-ENV RAILS_ENV=production \
-    RAILS_SERVE_STATIC_FILES=true \
-    BUNDLE_WITHOUT="development:test"
-
+ARG RAILS_ENV=production
+ARG NODE_ENV=production
+ARG EXECJS_RUNTIME=Node
 ARG RAILS_MASTER_KEY
 ARG GIT_CREDENTIALS
 
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+ENV RAILS_ENV=${RAILS_ENV} \
+    NODE_ENV=${NODE_ENV} \
+    RAILS_SERVE_STATIC_FILES=true \
+    BUNDLE_WITHOUT="development:test" \
+    RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Install required packages
 RUN apk add --update --no-cache \
     build-base \
     postgresql-dev \
+    postgis-dev \
     git \
     nodejs-current \
     yarn \
@@ -30,10 +33,7 @@ RUN mkdir -p /app/tmp/cache && chmod -R 777 /app/tmp/cache
 COPY Gemfile* /app/
 RUN bundle config frozen false \
     && bundle config "https://github.com/vedoc/vedoc-plugin.git" $GIT_CREDENTIALS \
-    && bundle install -j4 --retry 3 \
-    && rm -rf /usr/local/bundle/cache/*.gem \
-    && find /usr/local/bundle/gems/ -name "*.c" -delete \
-    && find /usr/local/bundle/gems/ -name "*.o" -delete
+    && bundle install -j4 --retry 3
 
 # Install yarn packages
 COPY package.json yarn.lock .yarnclean /app/
@@ -43,45 +43,40 @@ RUN yarn install
 COPY . .
 
 # Precompile assets
-# RUN bundle exec rake assets:precompile RAILS_ENV=production
+# RUN SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
 
 # Stage: Final
 FROM ruby:3.3.0-alpine
 
-# Install production dependencies only
+# Install production dependencies
 RUN apk add --update --no-cache \
     postgresql-client \
     postgis \
-    imagemagick \
     tzdata \
-    file \
-    nodejs-current
+    nodejs-current \
+    netcat-openbsd
 
-# Add non-root user
-RUN addgroup -g 1000 -S app && \
-    adduser -u 1000 -S app -G app
-
-# Set working directory
 WORKDIR /app
 
-# Copy app with gems from builder stage
+# Copy app with gems from builder
 COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
-COPY --from=Builder --chown=app:app /app /app
+COPY --from=Builder /app /app
 
 # Set environment variables
 ENV RAILS_ENV=production \
     RAILS_LOG_TO_STDOUT=true \
     RAILS_SERVE_STATIC_FILES=true
 
-# Copy entrypoint script
-COPY --chmod=755 bin/docker-entrypoint /usr/bin/
-
-# Switch to non-root user
-USER app
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+  CMD nc -z localhost 3001 || exit 1
 
 # Expose port
 EXPOSE 3001
 
-# Set entrypoint and command
+# Copy and set entrypoint
+COPY bin/docker-entrypoint /usr/bin/
+RUN chmod +x /usr/bin/docker-entrypoint
+
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

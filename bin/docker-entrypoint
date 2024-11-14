@@ -5,7 +5,7 @@ set -e
 rm -f /app/tmp/pids/server.pid
 
 # Wait for database
-until nc -z -v -w30 $DATABASE_HOST $DATABASE_PORT; do
+until nc -z -v -w30 $DATABASE_HOST 5432; do
   echo 'Waiting for database...'
   sleep 1
 done
