@@ -15,12 +15,15 @@ Rails.application.configure do
   config.require_master_key = true
 
   # Static file serving configuration
-  config.public_file_server.enabled = ENV.fetch("RAILS_SERVE_STATIC_FILES") { true }
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{30.days.to_i}"
+  }
 
   # Asset compilation settings
-  config.assets.compile = true
+  config.assets.compile = false
   config.assets.digest = true
-  config.assets.js_compressor = nil  # Temporarily disable JS compression
+  config.assets.js_compressor = nil
   config.assets.css_compressor = :sass
   config.assets.precompile += %w( active_admin.css active_admin.js application.css application.js )
 
