@@ -20,10 +20,10 @@ Rails.application.configure do
     'Cache-Control' => "public, max-age=#{30.days.to_i}"
   }
 
-  # Asset compilation settings
-  config.assets.compile = false
+  # Asset compilation settings 
+  config.assets.compile = true
   config.assets.digest = true
-  config.assets.js_compressor = nil
+  # config.assets.js_compressor = nil
   config.assets.css_compressor = :sass
   config.assets.precompile += %w( active_admin.css active_admin.js application.css application.js )
 
