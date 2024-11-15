@@ -351,7 +351,7 @@ select {
   /* line 31, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_typography.scss */
   h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 34, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_typography.scss */
   h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {
@@ -562,9 +562,9 @@ li ol {
   }
   /* line 2, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
   #header {
-    background-color: #364c6a;
-    background-image: linear-gradient(180deg, #364c6a, #212f41);
-    border-bottom: 1px solid #1a2534;
+    background-color: #272727;
+    background-image: linear-gradient(180deg, #272727, #080808);
+    border-bottom: 1px solid black;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
     text-shadow: #000 0 1px 0;
     display: table;
@@ -646,7 +646,7 @@ li ol {
   }
   /* line 75, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
   #header ul.tabs > li.current > a {
-    background: #425d82;
+    background: #ffd700;
     color: #fff;
   }
   /* line 80, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
@@ -656,12 +656,12 @@ li ol {
   }
   /* line 85, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
   #header ul.tabs > li.has_nested.current > a {
-    background: #425d82 url("data:image/png;base64,R0lGODlhBwAEAKIAAG1tbWxsbElJSVBQUP///0JCQgAAAAAAACH5BAEAAAUALAAAAAAHAAQAAAMLWLol80MoF5mQKgEAOw==") no-repeat calc(100% - 7px) 50%;
+    background: #ffd700 url("data:image/png;base64,R0lGODlhBwAEAKIAAG1tbWxsbElJSVBQUP///0JCQgAAAAAAACH5BAEAAAUALAAAAAAHAAQAAAMLWLol80MoF5mQKgEAOw==") no-repeat calc(100% - 7px) 50%;
     padding-right: 20px;
   }
   /* line 90, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
   #header ul.tabs > li:hover > a {
-    background: #425d82;
+    background: #ffed4a;
     color: #fff;
   }
   /* line 95, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
@@ -669,13 +669,13 @@ li ol {
     border-radius: 0;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    border-bottom: 5px solid #425d82;
-    background: #425d82 url("data:image/png;base64,R0lGODlhBwAEAKIAAG1tbWxsbElJSVBQUP///0JCQgAAAAAAACH5BAEAAAUALAAAAAAHAAQAAAMLWLol80MoF5mQKgEAOw==") no-repeat calc(100% - 7px) 50%;
+    border-bottom: 5px solid #ffed4a;
+    background: #ffed4a url("data:image/png;base64,R0lGODlhBwAEAKIAAG1tbWxsbElJSVBQUP///0JCQgAAAAAAACH5BAEAAAUALAAAAAAHAAQAAAMLWLol80MoF5mQKgEAOw==") no-repeat calc(100% - 7px) 50%;
     z-index: 1020;
   }
   /* line 104, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_header.scss */
   #header ul.tabs > li ul {
-    background: #425d82;
+    background: #ffed4a;
     border-top-right-radius: 10px;
     border-top-left-radius: 0;
     border-bottom-right-radius: 10px;
@@ -835,12 +835,12 @@ li ol {
     float: left;
     font-size: 1.0em;
     font-weight: bold;
-    color: #5E6469;
+    color: #4a4a4a;
   }
   /* line 28, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_forms.scss */
   form fieldset ol > li label abbr {
     border: none;
-    color: #ea5455;
+    color: #ffd700;
   }
   /* line 35, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_forms.scss */
   form fieldset ol > li.has_many_container {
@@ -1064,8 +1064,8 @@ form textarea:focus {
     margin-right: 3px;
     padding: 7px 16px 6px;
     text-decoration: none;
-    background-color: #47658c;
-    background-image: linear-gradient(180deg, #47658c, #182330);
+    background-color: #404040;
+    background-image: linear-gradient(180deg, #404040, black);
     text-shadow: #000 0 1px 0;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
     border: solid 1px #484e53;
@@ -1084,14 +1084,14 @@ form textarea:focus {
   }
   /* line 29, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   form input[type=submit]:not(.disabled):hover, form input[type=button]:not(.disabled):hover, form button:not(.disabled):hover {
-    background-color: #4c6c96;
-    background-image: linear-gradient(180deg, #4c6c96, #1e2a3b);
+    background-color: #484848;
+    background-image: linear-gradient(180deg, #484848, #030303);
   }
   /* line 33, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   form input[type=submit]:not(.disabled):active, form input[type=button]:not(.disabled):active, form button:not(.disabled):active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px #FFF;
-    background-color: #3b5374;
-    background-image: linear-gradient(180deg, #3b5374, #10171f);
+    background-color: #2e2e2e;
+    background-image: linear-gradient(180deg, #2e2e2e, black);
   }
   /* line 228, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/_forms.scss */
   form .buttons, form .actions {
@@ -1137,7 +1137,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 12, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   form fieldset.buttons li.cancel a.disabled, form fieldset.actions li.cancel a.disabled {
@@ -1164,7 +1164,7 @@ form textarea:focus {
   .sidebar_section label {
     display: block;
     text-transform: uppercase;
-    color: #5E6469;
+    color: #4a4a4a;
     font-size: 0.9em;
     font-weight: bold;
   }
@@ -1239,7 +1239,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 12, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   form.filter_form a.clear_filters_btn.disabled {
@@ -1282,14 +1282,14 @@ form textarea:focus {
     float: left;
     overflow: hidden;
     font-size: 0.9em;
-    color: #3e587b;
+    color: #343434;
   }
   /* line 16, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_comments.scss */
   .comments .active_admin_comment .active_admin_comment_meta .active_admin_comment_author {
     font-size: 1.2em;
     font-weight: bold;
     margin: 0;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 23, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_comments.scss */
   .comments .active_admin_comment .active_admin_comment_body {
@@ -1376,9 +1376,9 @@ form textarea:focus {
   }
   /* line 19, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_date_picker.scss */
   .ui-datepicker .ui-datepicker-header {
-    background-color: #364c6a;
-    background-image: linear-gradient(180deg, #364c6a, #212f41);
-    border-bottom: 1px solid #1a2534;
+    background-color: #272727;
+    background-image: linear-gradient(180deg, #272727, #080808);
+    border-bottom: 1px solid black;
     padding: 12px 5px 7px 4px;
     margin: 0px 0px 2px 2px;
     width: 156px;
@@ -1580,7 +1580,7 @@ form textarea:focus {
   }
   /* line 51, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   table.index_table tr.even td {
-    background: #c6d2e2;
+    background: #fcfaf2;
   }
   /* line 53, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   table.index_table tr.selected td {
@@ -1600,7 +1600,7 @@ form textarea:focus {
   .panel_contents table th {
     padding-top: 10px;
     background: none;
-    color: #2d4059;
+    color: #1a1a1a;
     box-shadow: none;
     text-shadow: #fff 0 1px 0;
     text-transform: uppercase;
@@ -1608,11 +1608,11 @@ form textarea:focus {
   }
   /* line 77, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .panel_contents table tr.odd td {
-    background: #bccadd;
+    background: #f9f5e6;
   }
   /* line 78, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .panel_contents table tr.even td {
-    background: #c6d2e2;
+    background: #fcfaf2;
   }
   /* line 82, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .attributes_table {
@@ -1620,11 +1620,11 @@ form textarea:focus {
   }
   /* line 85, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .attributes_table table col.even {
-    background: #c6d2e2;
+    background: #fcfaf2;
   }
   /* line 86, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .attributes_table table col.odd {
-    background: #bccadd;
+    background: #f9f5e6;
   }
   /* line 87, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
   .attributes_table table th, .attributes_table table td {
@@ -1640,7 +1640,7 @@ form textarea:focus {
     font-size: 0.9em;
     padding-left: 0;
     text-transform: uppercase;
-    color: #2d4059;
+    color: #1a1a1a;
     text-shadow: #fff 0 1px 0;
   }
   /* line 103, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_tables.scss */
@@ -1735,8 +1735,8 @@ form textarea:focus {
     margin-right: 3px;
     padding: 7px 16px 6px;
     text-decoration: none;
-    background-color: #47658c;
-    background-image: linear-gradient(180deg, #47658c, #182330);
+    background-color: #404040;
+    background-image: linear-gradient(180deg, #404040, black);
     text-shadow: #000 0 1px 0;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
     border: solid 1px #484e53;
@@ -1754,14 +1754,14 @@ form textarea:focus {
   }
   /* line 29, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .ui-dialog .ui-dialog-buttonpane button:not(.disabled):hover {
-    background-color: #4c6c96;
-    background-image: linear-gradient(180deg, #4c6c96, #1e2a3b);
+    background-color: #484848;
+    background-image: linear-gradient(180deg, #484848, #030303);
   }
   /* line 33, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .ui-dialog .ui-dialog-buttonpane button:not(.disabled):active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px #FFF;
-    background-color: #3b5374;
-    background-image: linear-gradient(180deg, #3b5374, #10171f);
+    background-color: #2e2e2e;
+    background-image: linear-gradient(180deg, #2e2e2e, black);
   }
   /* line 28, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_modal_dialog.scss */
   .ui-dialog .ui-dialog-buttonpane button:last-child {
@@ -1784,7 +1784,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 12, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .ui-dialog .ui-dialog-buttonpane button.disabled:last-child {
@@ -1853,7 +1853,7 @@ form textarea:focus {
   }
   /* line 9, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_breadcrumbs.scss */
   .breadcrumb a, .breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:active {
-    color: #8a949e;
+    color: #d4af37;
     text-decoration: none;
   }
   /* line 14, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_breadcrumbs.scss */
@@ -1863,7 +1863,7 @@ form textarea:focus {
   /* line 16, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_breadcrumbs.scss */
   .breadcrumb .breadcrumb_sep {
     margin: 0 2px;
-    color: #aab2ba;
+    color: #666666;
   }
   /* line 1, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_dropdown_menu.scss */
   .dropdown_menu {
@@ -1890,7 +1890,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
     position: relative;
     padding-right: 22px !important;
     cursor: pointer;
@@ -1950,7 +1950,7 @@ form textarea:focus {
     height: 0;
     border-width: 0 6px 6px;
     border-style: solid;
-    border-color: #26364b transparent;
+    border-color: #101010 transparent;
     z-index: 100;
   }
   /* line 51, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_dropdown_menu.scss */
@@ -1961,7 +1961,7 @@ form textarea:focus {
     height: 0;
     border-width: 0 5px 5px;
     border-style: solid;
-    border-color: #47658c transparent;
+    border-color: #404040 transparent;
     left: -5px;
     top: 1px;
   }
@@ -1973,7 +1973,7 @@ form textarea:focus {
     height: 0;
     border-width: 0 5px 5px;
     border-style: solid;
-    border-color: #344a67 transparent;
+    border-color: #242424 transparent;
     left: -5px;
     top: 2px;
   }
@@ -1983,13 +1983,13 @@ form textarea:focus {
     position: absolute;
     background-color: white;
     padding: 2px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, #47658c 0px 1px 0px 0px inset;
-    background-color: #2d4059;
-    background-color: #344a67;
-    background-image: linear-gradient(180deg, #344a67, #243448);
-    border: solid 1px #1c2837;
-    border-top-color: #26364b;
-    border-bottom-color: #10171f;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, #404040 0px 1px 0px 0px inset;
+    background-color: #1a1a1a;
+    background-color: #242424;
+    background-image: linear-gradient(180deg, #242424, #0d0d0d);
+    border: solid 1px #010101;
+    border-top-color: #101010;
+    border-bottom-color: black;
     border-radius: 4px;
     z-index: 2000;
     display: none;
@@ -1998,8 +1998,8 @@ form textarea:focus {
   .dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list {
     display: block;
     background-color: #FFF;
-    border: solid 1px #1c2837;
-    box-shadow: #364c6a 0px 1px 0px 0px;
+    border: solid 1px #010101;
+    box-shadow: #272727 0px 1px 0px 0px;
     border-radius: 3px;
     margin: 0;
     overflow: hidden;
@@ -2066,8 +2066,8 @@ form textarea:focus {
     margin-right: 3px;
     padding: 7px 16px 6px;
     text-decoration: none;
-    background-color: #47658c;
-    background-image: linear-gradient(180deg, #47658c, #182330);
+    background-color: #404040;
+    background-image: linear-gradient(180deg, #404040, black);
     text-shadow: #000 0 1px 0;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
     border: solid 1px #484e53;
@@ -2085,14 +2085,14 @@ form textarea:focus {
   }
   /* line 29, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   a.button:not(.disabled):hover, a.button:link:not(.disabled):hover, a.button:visited:not(.disabled):hover, input[type=submit]:not(.disabled):hover, input[type=button]:not(.disabled):hover, button:not(.disabled):hover {
-    background-color: #4c6c96;
-    background-image: linear-gradient(180deg, #4c6c96, #1e2a3b);
+    background-color: #484848;
+    background-image: linear-gradient(180deg, #484848, #030303);
   }
   /* line 33, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:visited:not(.disabled):active, input[type=submit]:not(.disabled):active, input[type=button]:not(.disabled):active, button:not(.disabled):active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px #FFF;
-    background-color: #3b5374;
-    background-image: linear-gradient(180deg, #3b5374, #10171f);
+    background-color: #2e2e2e;
+    background-image: linear-gradient(180deg, #2e2e2e, black);
   }
   /* line 2, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_grid.scss */
   table.index_grid td {
@@ -2112,7 +2112,7 @@ form textarea:focus {
   }
   /* line 1, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_links.scss */
   a, a:link, a:visited {
-    color: #ea5455;
+    color: #c7a100;
     text-decoration: underline;
   }
   /* line 5, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_links.scss */
@@ -2150,7 +2150,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
   }
   /* line 12, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .pagination a.disabled {
@@ -2184,8 +2184,8 @@ form textarea:focus {
     margin-right: 3px;
     padding: 7px 16px 6px;
     text-decoration: none;
-    background-color: #47658c;
-    background-image: linear-gradient(180deg, #47658c, #182330);
+    background-color: #404040;
+    background-image: linear-gradient(180deg, #404040, black);
     text-shadow: #000 0 1px 0;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
     border: solid 1px #484e53;
@@ -2203,14 +2203,14 @@ form textarea:focus {
   }
   /* line 29, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .pagination span.page.current:not(.disabled):hover {
-    background-color: #4c6c96;
-    background-image: linear-gradient(180deg, #4c6c96, #1e2a3b);
+    background-color: #484848;
+    background-image: linear-gradient(180deg, #484848, #030303);
   }
   /* line 33, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
   .pagination span.page.current:not(.disabled):active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px #FFF;
-    background-color: #3b5374;
-    background-image: linear-gradient(180deg, #3b5374, #10171f);
+    background-color: #2e2e2e;
+    background-image: linear-gradient(180deg, #2e2e2e, black);
   }
   /* line 18, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_pagination.scss */
   .pagination a, .pagination span.page.current {
@@ -2258,7 +2258,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
     border-radius: 0px;
     padding: 1px 5px;
   }
@@ -2388,7 +2388,7 @@ form textarea:focus {
   }
   /* line 1, ../../../../../home/ikonde/.asdf/installs/ruby/3.3.1/lib/ruby/gems/3.3.0/gems/activeadmin-3.2.2/app/assets/stylesheets/active_admin/components/_status_tags.scss */
   .status_tag {
-    background: #d71a1c;
+    background: #b39700;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -2440,7 +2440,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
     background-color: #FFFFFF;
     background-image: linear-gradient(180deg, #FFFFFF, #F0F0F0);
     border-color: #d0d0d0;
@@ -2608,7 +2608,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
     background-color: #FFFFFF;
     background-image: linear-gradient(180deg, #FFFFFF, #F0F0F0);
     border-color: #d0d0d0;
@@ -2700,9 +2700,9 @@ form textarea:focus {
     margin-bottom: 0.5em;
     color: #ffffff;
     padding: 5px 10px 3px 10px;
-    background-color: #364c6a;
-    background-image: linear-gradient(180deg, #364c6a, #212f41);
-    border-bottom: 1px solid #1a2534;
+    background-color: #272727;
+    background-image: linear-gradient(180deg, #272727, #080808);
+    border-bottom: 1px solid black;
     text-shadow: #000 0 1px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     border: none;
@@ -2871,7 +2871,7 @@ form textarea:focus {
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
     text-shadow: #fff 0 1px 0;
-    color: #2d4059;
+    color: #1a1a1a;
     padding: 12px 17px 10px;
     margin: 0px;
   }
@@ -3733,189 +3733,98 @@ li ol {
   }
 }
 
-/* line 23, app/assets/stylesheets/active_admin.scss */
+/* line 22, app/assets/stylesheets/active_admin.scss */
 body.active_admin {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-/* line 26, app/assets/stylesheets/active_admin.scss */
+/* line 25, app/assets/stylesheets/active_admin.scss */
 body.active_admin #header {
-  background: #2d4059;
+  background: #1a1a1a;
   padding: 12px;
+  border-bottom: 3px solid #ffd700;
 }
 
 /* line 30, app/assets/stylesheets/active_admin.scss */
 body.active_admin #header h1.site_title {
   font-weight: 600;
   padding-left: 30px;
+  color: #ffd700;
 }
 
-/* line 35, app/assets/stylesheets/active_admin.scss */
+/* line 36, app/assets/stylesheets/active_admin.scss */
 body.active_admin #header ul.tabs > li > a {
   padding: 8px 12px;
   margin: 4px;
   border-radius: 4px;
+  color: #ffffff;
 }
 
-/* line 40, app/assets/stylesheets/active_admin.scss */
+/* line 42, app/assets/stylesheets/active_admin.scss */
 body.active_admin #header ul.tabs > li > a:hover {
-  background: #425d82;
+  background: #ffd700;
+  color: #1a1a1a;
 }
 
-/* line 46, app/assets/stylesheets/active_admin.scss */
+/* line 49, app/assets/stylesheets/active_admin.scss */
 body.active_admin #title_bar {
-  background: #e1e8f0;
+  background: linear-gradient(to right, #1a1a1a, #2a2a2a);
   padding: 15px 30px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* line 51, app/assets/stylesheets/active_admin.scss */
+/* line 54, app/assets/stylesheets/active_admin.scss */
 body.active_admin #title_bar h2 {
   font-weight: 600;
-  color: #2d4059;
+  color: #ffd700;
 }
 
-/* line 57, app/assets/stylesheets/active_admin.scss */
+/* line 60, app/assets/stylesheets/active_admin.scss */
 body.active_admin .panel {
+  border: 1px solid #e0c340;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* line 61, app/assets/stylesheets/active_admin.scss */
+/* line 65, app/assets/stylesheets/active_admin.scss */
 body.active_admin .panel h3 {
-  background: #2d4059;
-  color: #fff;
+  background: #1a1a1a;
+  color: #ffd700;
   padding: 12px 15px;
   border-radius: 6px 6px 0 0;
 }
 
-/* line 69, app/assets/stylesheets/active_admin.scss */
-body.active_admin .table_tools {
-  margin-bottom: 20px;
-}
-
 /* line 73, app/assets/stylesheets/active_admin.scss */
-body.active_admin .table_tools .batch_actions_selector a.dropdown_menu_button {
-  background: #ea5455;
-  color: #fff;
+body.active_admin .button, body.active_admin .action_item a {
+  background: #ffd700;
+  color: #1a1a1a;
   text-shadow: none;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
 }
 
-/* line 81, app/assets/stylesheets/active_admin.scss */
-body.active_admin .table_tools .batch_actions_selector a.dropdown_menu_button:hover {
-  background: #e73d3e;
+/* line 78, app/assets/stylesheets/active_admin.scss */
+body.active_admin .button:hover, body.active_admin .action_item a:hover {
+  background: #ccac00;
 }
 
-/* line 88, app/assets/stylesheets/active_admin.scss */
-body.active_admin table.index_table {
-  border-radius: 6px;
-  border: 1px solid #e4e4e4;
-}
-
-/* line 92, app/assets/stylesheets/active_admin.scss */
-body.active_admin table.index_table th {
-  background: #e1e8f0;
-  padding: 12px;
-}
-
-/* line 96, app/assets/stylesheets/active_admin.scss */
-body.active_admin table.index_table th.sorted-asc, body.active_admin table.index_table th.sorted-desc {
-  background: #d1dae7;
-}
-
-/* line 101, app/assets/stylesheets/active_admin.scss */
-body.active_admin table.index_table tr.even td {
-  background: #c6d2e2;
-}
-
-/* line 105, app/assets/stylesheets/active_admin.scss */
-body.active_admin table.index_table td {
-  padding: 12px;
-}
-
-/* line 110, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs {
-  border-radius: 6px;
-}
-
-/* line 114, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs legend span {
-  font-weight: 600;
-  color: #2d4059;
-}
-
-/* line 120, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs ol > li {
-  padding: 12px;
-}
-
-/* line 123, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs ol > li label {
-  font-weight: 500;
-}
-
-/* line 127, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs ol > li input[type=text], body.active_admin form fieldset.inputs ol > li input[type=email], body.active_admin form fieldset.inputs ol > li input[type=password], body.active_admin form fieldset.inputs ol > li textarea {
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-/* line 132, app/assets/stylesheets/active_admin.scss */
-body.active_admin form fieldset.inputs ol > li input[type=text]:focus, body.active_admin form fieldset.inputs ol > li input[type=email]:focus, body.active_admin form fieldset.inputs ol > li input[type=password]:focus, body.active_admin form fieldset.inputs ol > li textarea:focus {
-  border-color: #ea5455;
-  box-shadow: 0 0 0 2px rgba(234, 84, 85, 0.2);
-}
-
-/* line 141, app/assets/stylesheets/active_admin.scss */
-body.active_admin .buttons input[type=submit] {
-  background: #ea5455;
-  color: #fff;
-  text-shadow: none;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 4px;
-}
-
-/* line 149, app/assets/stylesheets/active_admin.scss */
-body.active_admin .buttons input[type=submit]:hover {
-  background: #e73d3e;
-}
-
-/* line 155, app/assets/stylesheets/active_admin.scss */
-body.active_admin .sidebar_section {
-  border-radius: 6px;
-}
-
-/* line 158, app/assets/stylesheets/active_admin.scss */
-body.active_admin .sidebar_section h3 {
-  background: #2d4059;
-  color: #fff;
-  padding: 12px;
-  border-radius: 6px 6px 0 0;
-}
-
-/* line 168, app/assets/stylesheets/active_admin.scss */
+/* line 85, app/assets/stylesheets/active_admin.scss */
 .status_tag {
   border-radius: 12px;
   padding: 4px 12px;
   font-size: 0.9em;
 }
 
-/* line 173, app/assets/stylesheets/active_admin.scss */
+/* line 90, app/assets/stylesheets/active_admin.scss */
 .status_tag.ok, .status_tag.published, .status_tag.complete, .status_tag.completed, .status_tag.green {
   background: #8cc63f;
 }
 
-/* line 177, app/assets/stylesheets/active_admin.scss */
+/* line 94, app/assets/stylesheets/active_admin.scss */
 .status_tag.warn, .status_tag.warning, .status_tag.orange {
   background: #f90;
 }
 
-/* line 181, app/assets/stylesheets/active_admin.scss */
+/* line 98, app/assets/stylesheets/active_admin.scss */
 .status_tag.error, .status_tag.errored, .status_tag.red {
   background: #ea5455;
 }
