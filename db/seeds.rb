@@ -16,9 +16,9 @@ end
 # Create default admin user with admin role
 if AdminUser.count.zero?
   admin = AdminUser.create!(
-    email: ENV['ADMIN_EMAIL'] || 'arnoldnek@gmail.com',
-    password: ENV['ADMIN_PASSWORD'] || 'password123',
-    password_confirmation: ENV['ADMIN_PASSWORD'] || 'password123'
+    email: Rails.application.credentials.dig(:admin, :email) || 'arnoldn@vedocapp.com',
+    password: Rails.application.credentials.dig(:admin, :password) || 'arnold123',
+    password_confirmation: Rails.application.credentials.dig(:admin, :password) || 'arnold123'
   )
   admin.add_role(:admin)
 end
