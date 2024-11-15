@@ -3,11 +3,6 @@
 
 puts "Starting seed process..."
 
-# Verify credentials are loaded
-if Rails.application.credentials.admin.nil?
-  raise "Admin credentials not found! Please ensure credentials are properly configured."
-end
-
 # Create default roles
 puts "Creating default roles..."
 %w[admin editor viewer].each do |role_name|
@@ -19,18 +14,14 @@ end
 # Create default admin user with admin role
 puts "Setting up admin user..."
 if AdminUser.count.zero?
-  admin_email = Rails.application.credentials.dig(:admin, :email)
-  admin_password = Rails.application.credentials.dig(:admin, :password)
-
-  unless admin_email && admin_password
-    raise "Admin credentials are not properly set in credentials file!"
-  end
+  admin_email = 'arnoldn@vedocapp.com'
+  admin_password = 'password1998'
 
   begin
     admin = AdminUser.create!(
-      email: arnoldn@vedocapp.com,
-      password: password1998,
-      password_confirmation: password1998
+      email: admin_email,
+      password: admin_password,
+      password_confirmation: admin_password
     )
     admin.add_role(:admin)
     puts "Admin user created successfully with email: #{admin_email}"
