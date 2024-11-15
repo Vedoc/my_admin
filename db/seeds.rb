@@ -1,25 +1,46 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# This file ensures the existence of required records across all environments.
+# It is idempotent and can be executed multiple times safely.
+
+puts "Starting seed process..."
+
+# Verify credentials are loaded
+if Rails.application.credentials.admin.nil?
+  raise "Admin credentials not found! Please ensure credentials are properly configured."
+end
 
 # Create default roles
+puts "Creating default roles..."
 %w[admin editor viewer].each do |role_name|
-  Role.find_or_create_by!(name: role_name)
+  if Role.find_or_create_by!(name: role_name)
+    puts "Role '#{role_name}' created or found successfully"
+  end
 end
 
 # Create default admin user with admin role
+puts "Setting up admin user..."
 if AdminUser.count.zero?
-  admin = AdminUser.create!(
-    email: Rails.application.credentials.dig(:admin, :email) || 'arnoldn@vedocapp.com',
-    password: Rails.application.credentials.dig(:admin, :password) || 'arnold123',
-    password_confirmation: Rails.application.credentials.dig(:admin, :password) || 'arnold123'
-  )
-  admin.add_role(:admin)
+  admin_email = Rails.application.credentials.dig(:admin, :email)
+  admin_password = Rails.application.credentials.dig(:admin, :password)
+
+  unless admin_email && admin_password
+    raise "Admin credentials are not properly set in credentials file!"
+  end
+
+  begin
+    admin = AdminUser.create!(
+      email: arnoldn@vedocapp.com,
+      password: password1998,
+      password_confirmation: password1998
+    )
+    admin.add_role(:admin)
+    puts "Admin user created successfully with email: #{admin_email}"
+  rescue => e
+    puts "Failed to create admin user: #{e.message}"
+    raise
+  end
+else
+  puts "Admin user already exists, skipping creation"
 end
+
+puts "Seed process completed successfully!"
   
