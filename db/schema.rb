@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_10_143620) do
   create_schema "topology"
 
   # These are extensions that must be enabled in order to support this database
@@ -33,7 +33,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer "failed_attempts"
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.integer "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
+    t.index ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_accounts_on_uid_and_provider", unique: true
@@ -107,6 +119,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "card_token"
+    t.boolean "approved", default: true, null: false
     t.index ["location"], name: "index_clients_on_location", using: :gist
   end
 
@@ -163,6 +176,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_promo_codes_on_shop_id"
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "phone_number", null: false
+    t.string "car_needs", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -235,7 +258,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_151832) do
     t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.string "address", default: "", null: false
     t.string "phone", default: "", null: false
-    t.boolean "approved", default: false, null: false
+    t.boolean "approved", default: true, null: false
     t.string "avatar"
     t.text "additional_info"
     t.decimal "average_rating", precision: 3, scale: 2, default: "0.0", null: false
