@@ -19,7 +19,7 @@ ActiveAdmin.register Promotion do
         f.input :last_name
         f.input :email
         f.input :phone_number
-        f.input :car_needs, as: :select, collection: ['Maintainance', 'Diagonosis', 'Detail', 'Windshield Repair', 'Tire Replacement', 'Brake Job']
+        f.input :car_needs, as: :select, collection: Promotion::VALID_CAR_NEEDS
       end
       f.actions
     end
