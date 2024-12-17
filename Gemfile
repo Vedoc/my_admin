@@ -114,6 +114,8 @@ gem "activeadmin", "~> 3.2"
 
 gem "rexml", ">= 3.2.7"
 
+gem 'rack-cors'
+
 
 
 gem "nokogiri", ">= 1.16.5"
