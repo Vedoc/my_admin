@@ -1,4 +1,6 @@
 ActiveAdmin.register Promotion do
+  VALID_CAR_NEEDS = ['Maintenance', 'Diagnosis', 'Detail', 'Windshield Repair', 'Tire Replacement', 'Brake Job',
+                     'Roadside'].freeze
   permit_params :first_name, :last_name, :email, :phone_number, :car_needs
 
   index do
@@ -19,8 +21,7 @@ ActiveAdmin.register Promotion do
       f.input :last_name
       f.input :email
       f.input :phone_number
-      f.input :car_needs, as: :select
-      # , collection: Promotion::VALID_CAR_NEEDS
+      f.input :car_needs, as: :select, collection: VALID_CAR_NEEDS, prompt: 'Select an option'
     end
     f.actions
   end
