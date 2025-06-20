@@ -1,11 +1,11 @@
-source "https://rubygems.org"
-git_source( :github ) { | repo | "https://github.com/#{ repo }.git" }
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby "3.3.1"
 ruby '3.3.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+gem 'rails', '~> 7.1.3', '>= 7.1.3.2'
 # gem 'rails', '~> 7.1.3.2'
 
 # Vedoc app models
@@ -13,35 +13,35 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem 'vedoc-plugin', git: 'https://github.com/vedoc/vedoc-plugin.git'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # ActiveRecord connection adapter for PostGIS, based on postgresql and rgeo
 gem 'activerecord-postgis-adapter'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem 'puma', '>= 5.0'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem 'importmap-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem 'turbo-rails'
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5.2.1'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem 'jbuilder'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
 gem 'sassc'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -58,7 +58,6 @@ gem 'carrierwave'
 # UI interface for rails-settings-cached in active admin
 # agem 'activeadmin_settings_cached', '>= 2.3.1'
 
-
 # Ruby bindings to Firebase Cloud Messaging
 gem 'fcm'
 
@@ -70,13 +69,18 @@ gem 'fcm'
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1.7'
+gem 'rgeo'
+
+gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'rgeo-activerecord'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -94,38 +98,35 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.5'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
-gem "devise", "~> 4.9"
+gem 'devise', '~> 4.9'
 
-gem "activeadmin", "~> 3.2"
+gem 'activeadmin', '~> 3.2'
 
-gem "rexml", ">= 3.2.7"
+gem 'rexml', '>= 3.2.7'
 
 gem 'rack-cors'
 
-
-
-gem "nokogiri", ">= 1.16.5"
+gem 'nokogiri', '>= 1.16.5'
 
 gem 'inherited_resources'
 
 gem 'terser'
 
-gem 'rolify'
-gem 'pundit'
 gem 'activeadmin_addons'
+gem 'pundit'
+gem 'rolify'
 
 gem 'omniauth'

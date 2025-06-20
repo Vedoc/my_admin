@@ -1,6 +1,6 @@
-class CreateShops < ActiveRecord::Migration[ 7.1 ]
+class CreateShops < ActiveRecord::Migration[7.1]
   def change
-    create_table :shops do | t |
+    create_table :shops do |t|
       t.string   :name, default: '', null: false, index: { unique: true }
       t.string   :owner_name, null: false, default: ''
       t.string   :hours_of_operation, default: '', null: false
