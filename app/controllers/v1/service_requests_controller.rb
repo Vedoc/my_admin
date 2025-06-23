@@ -1,5 +1,5 @@
 module V1
-  class ServiceRequestsController < ApplicationController
+  class ServiceRequestsController < BaseApiController
     protect_from_forgery with: :null_session
     skip_before_action :verify_authenticity_token
     before_action :set_service_request, only: [:destroy]

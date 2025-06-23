@@ -14,5 +14,8 @@ Rails.application.routes.draw do
     get 'settings', to: 'service_requests#settings_index'
 
     post 'auth', to: 'auth#create'
+    post 'sign_up_business', to: 'auth#signUpBusiness'
+
+    post '/auth/sign_in', to: 'auth#sign_in'
   end
 end

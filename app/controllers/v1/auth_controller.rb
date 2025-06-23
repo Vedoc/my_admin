@@ -55,6 +55,46 @@ module V1
       end
     end
 
+    def sign_in
+      email = params[:email]
+      password = params[:password]
+
+      if email.blank? || password.blank? || device_params[:platform].blank? || device_params[:device_id].blank? || device_params[:device_token].blank?
+        return render json: { errors: ['Email, password, and all device details are required.'] },
+                      status: :bad_request
+      end
+
+      user = User.find_by(email: email)
+
+      if user && user.authenticate(password)
+
+        payload = { user_id: user.id, exp: (Time.now + 2.weeks).to_i }
+        token = JWT.encode(payload, JWT_SECRET_KEY, JWT_ALGORITHM)
+
+        device = user.devices.find_or_initialize_by(device_id: device_params[:device_id])
+        device.platform = device_params[:platform]
+        device.device_token = device_params[:device_token]
+
+        unless device.save
+          Rails.logger.error("Failed to save/update device for user #{user.id}: #{device.errors.full_messages.join(', ')}")
+        end
+
+        render json: {
+          message: 'Sign in successful',
+          user_id: user.id,
+          access_token: token
+        }, status: :ok
+      else
+        render json: { errors: ['Invalid email or password.'] }, status: :unauthorized
+      end
+    rescue ArgumentError => e
+      render json: { errors: ["Invalid input provided: #{e.message}"] }, status: :bad_request
+    rescue StandardError => e
+      Rails.logger.error("Error during sign in: #{e.message}\n#{e.backtrace.join("\n")}")
+      render json: { errors: ['An unexpected error occurred during sign in.'] },
+             status: :internal_server_error
+    end
+
     private
 
     def user_params

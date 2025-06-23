@@ -52,6 +52,8 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 
+gem 'jwt', '~> 2.8'
+
 # Solution for file uploads
 gem 'carrierwave'
 
